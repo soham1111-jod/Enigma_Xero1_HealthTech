@@ -7,7 +7,7 @@ const userSchema = new Schema(
     username: {
       type: String,
       require: true,
-      unique: true,
+      //unique: true,
       lowercase: true,
       trim: true,
       index: true,
@@ -15,7 +15,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       require: true,
-      unique: true,
+      //unique: true,
       lowercase: true,
       trim: true,
     
@@ -30,20 +30,13 @@ const userSchema = new Schema(
       trim: true,
    
     },
-    watchHistory: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Video",
-        require: true,
-      },
-    ],
     avatar: {
       type: String, //the string is came from the cloudunary
-      require: true,
+      //require: true,
     },
-    coverImage: {
-      type: String,
-    },
+    // coverImage: {
+    //   type: String,
+    // },
     refereshToken: {
       type: String,
     },

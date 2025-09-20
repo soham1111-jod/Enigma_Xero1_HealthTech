@@ -1,3 +1,6 @@
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/APIError.js";
+import ApiResponse from "../utils/APIResponse.js";
 import { User } from "../models/User.model.js";
 import jwt from "jsonwebtoken";
 
@@ -32,35 +35,35 @@ const userRegister = asyncHandler(async (req, res) => {
     throw new ApiError(409, "Username or Email is already exists.");
   }
 
-  const AvatarLocalPath = req.files?.avatar[0]?.path;
+  //const AvatarLocalPath = req.files?.avatar[0]?.path;
   //const CoverImageLocalPath = req.files?.coverImage[0]?.path;
-  let CoverImageLocalPath;
-  if (
-    req.files &&
-    Array.isArray(req.files.coverImage) &&
-    req.files.coverImage.length > 0
-  ) {
-    CoverImageLocalPath = req.files.coverImage.path;
-  }
+  // let CoverImageLocalPath;
+  // if (
+  //   req.files &&
+  //   Array.isArray(req.files.coverImage) &&
+  //   req.files.coverImage.length > 0
+  // ) {
+  //   CoverImageLocalPath = req.files.coverImage.path;
+  // }
 
-  if (!AvatarLocalPath) {
-    throw new ApiError(400, "Avatar is require");
-  }
+  // if (!AvatarLocalPath) {
+  //   throw new ApiError(400, "Avatar is require");
+  // }
 
-  const avatar = await uplodOnCloudinary(AvatarLocalPath);
-  const coverImage = await uplodOnCloudinary(CoverImageLocalPath);
+  // const avatar = await uplodOnCloudinary(AvatarLocalPath);
+  // const coverImage = await uplodOnCloudinary(CoverImageLocalPath);
 
-  if (!avatar) {
-    throw new ApiError(400, "Avatar is require");
-  }
+  // if (!avatar) {
+  //   throw new ApiError(400, "Avatar is require");
+  // }
 
   const user = await User.create({
     fullname,
     email,
     password,
     username: username.toLowerCase(),
-    avatar: avatar.url,
-    coverImage: coverImage?.url || "",
+    // avatar: avatar.url,
+    // coverImage: coverImage?.url || "",
   });
 
   const userCreated = await User.findById(user._id).select(
